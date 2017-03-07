@@ -39,4 +39,8 @@ public class HomeworkList {
         return found;
     }
     
+    public static List<Homework> getList(){
+        return list;
+    }
+    
 }

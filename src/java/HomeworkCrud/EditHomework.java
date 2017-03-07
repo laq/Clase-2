@@ -1,14 +1,13 @@
+package HomeworkCrud;
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package HomeworkCrud;
-
 import Homework.Homework;
 import Homework.HomeworkList;
 import java.io.IOException;
-import java.io.PrintWriter;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -18,29 +17,10 @@ import javax.servlet.http.HttpServletResponse;
 
 /**
  *
- * @author usuario
+ * @author laq
  */
-@WebServlet(name = "DeleteHomework", urlPatterns = {"/DeleteHomework"})
-public class DeleteHomework extends HttpServlet {
-
-    /**
-     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
-     * methods.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
-    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        String sId = request.getParameter("id");
-        int id = Integer.parseInt(sId);        
-        Homework hw = HomeworkList.search(id);
-        HomeworkList.list.remove(hw);
-        RequestDispatcher dispatcher = request.getRequestDispatcher("listHomework.jsp");
-        dispatcher.forward(request, response);
-    }
+@WebServlet(urlPatterns = {"/EditHomework"})
+public class EditHomework extends HttpServlet {
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
@@ -54,7 +34,12 @@ public class DeleteHomework extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        String sId = request.getParameter("id");
+        int id = Integer.parseInt(sId);
+        Homework hw = HomeworkList.search(id);
+        request.setAttribute("hw", hw);
+        RequestDispatcher dispatcher = request.getRequestDispatcher("editHomework.jsp");
+        dispatcher.forward(request, response);
     }
 
     /**
@@ -68,7 +53,18 @@ public class DeleteHomework extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        String name = request.getParameter("name");
+        String folder = request.getParameter("folder");
+        int grade = Integer.parseInt(request.getParameter("grade"));
+        int id = Integer.parseInt(request.getParameter("id"));
+
+        Homework hw = HomeworkList.search(id);
+        hw.setName(name);
+        hw.setFolder(folder);
+        hw.setGrade(grade);
+        request.setAttribute("hw", hw);
+        RequestDispatcher dispatcher = request.getRequestDispatcher("showHomework.jsp");
+        dispatcher.forward(request, response);
     }
 
     /**

@@ -10,6 +10,9 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Create homework</title>
+        <link rel="stylesheet" type="text/css" href="css/basicStyle.css">
+            
+        
     </head>
     <body>
         <h1>Hi, which home work do you want to create?</h1>
@@ -18,8 +21,8 @@
             <label for="name">Homework Name:</label>
             <input name="name">
             <label>Grade:</label> <input name="grade" type="number" min="0" max="5">
-            <label>Address</label>
-            <input name="address">
+            <label>Address:</label>
+            <input name="folder">
             <input type="submit" value="Agregar Tarea">                
         </form>
             
